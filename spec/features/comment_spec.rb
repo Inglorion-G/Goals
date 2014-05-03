@@ -31,7 +31,26 @@ feature 'Comment' do
 
   end
 
-  context "comment on a user"
+  context "commenting on a user" do
 
+    before(:each) do
+      buck = FactoryGirl.create(:buck)
+      visit user_url(buck)
+    end
 
+    scenario "a user can't leave a blank comment" do
+      click_button "Add Comment"
+      expect(page).to have_content "can't be blank"
+    end
+
+    scenario "adds a non-blank comment and returns to the user home page" do
+      fill_in "Comment", with: "I'm a comment!"
+      click_button "Add Comment"
+      expect(page).to have_content "#{buck.name}"
+      expect(page).to have_content "I'm a comment!"
+    end
+
+  end
+
+end
 
