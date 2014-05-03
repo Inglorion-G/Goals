@@ -1,4 +1,5 @@
 class Goal < ActiveRecord::Base
+  include Commentable
   validates :title, :user_id, presence: true
   # validates :public, presence: true
 

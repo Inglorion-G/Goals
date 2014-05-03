@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140502185143) do
+ActiveRecord::Schema.define(version: 20140503052429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: true do |t|
+    t.string   "body",                         null: false
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "author_id",        default: 0, null: false
+  end
 
   create_table "goals", force: true do |t|
     t.integer  "user_id",                     null: false
@@ -26,7 +35,7 @@ ActiveRecord::Schema.define(version: 20140502185143) do
     t.datetime "updated_at"
   end
 
-  add_index "goals", ["user_id"], name: "index_goals_on_user_id", using: :btreek
+  add_index "goals", ["user_id"], name: "index_goals_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",        null: false

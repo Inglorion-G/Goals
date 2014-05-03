@@ -1,5 +1,14 @@
 <h1 align="center"><%= @user.username.capitalize %> Home</h1>
 <%= render @user.goals %>
+
+<% @user.comments.each do |comment| %>
+  <p><strong><%= comment.author.username %></strong>: <%= comment.body %></p>
+<% end %>
+
+<%= render partial: 'comments/form',
+					 locals: { commentable_type: "User",
+					 commentable_id: @user.id } %>
+
 <% if @user == current_user %>
 	<%= link_to "Create New Goal", new_user_goal_url(@user) %><br>
 	<%= link_to "Goal Feed", feed_url %><br>
