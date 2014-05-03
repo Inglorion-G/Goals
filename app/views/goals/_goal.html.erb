@@ -6,7 +6,9 @@
 <% if goal.completed %>
   <h4>Completed!</h4>
 <% end %>
+<% if goal.user == current_user %>
 <%= button_to "Remove Goal", goal_url(goal), method: :delete %>
+<% end %>
 <p>_____________________________________</p>
 </div>
 <% end %>

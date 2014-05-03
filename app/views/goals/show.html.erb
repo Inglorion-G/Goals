@@ -9,6 +9,10 @@
 	<% end %>
 <% end %>
 
+<% @goal.comments.each do |comment| %>
+  <p><strong><%= comment.author.username %></strong>: <%= comment.body %></p>
+<% end %>
+
 <%= render partial: 'comments/form',
 					 locals: { commentable_type: "Goal",
 					 commentable_id: @goal.id } %>
