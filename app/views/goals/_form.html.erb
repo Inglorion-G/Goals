@@ -3,7 +3,7 @@
 <% title =  ( @goal.persisted? ? "Edit Goal" 					: "New Goal"  )  %>
 <% submit = ( @goal.persisted? ? "Update Goal" 				: "Create Goal"  )  %>
 
-<h1><%= title %></h1>
+<div align="center"><h1><%= title %></h1></div>
 <form action="<%= action %>" method="POST" accept-charset="utf-8">
 	<input type="hidden"
 				 name="authenticity_token"
