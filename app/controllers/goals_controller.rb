@@ -36,7 +36,7 @@ class GoalsController < ApplicationController
     @goal = Goal.find(params[:id])
   end
 
-  def index
+  def completed
     @goals = current_user.goals
     render :index
   end
