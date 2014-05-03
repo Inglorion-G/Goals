@@ -1,3 +1,4 @@
+<% if goal.public || goal.user == current_user %>
 <div align="left" hspace=20>
 <p>_____________________________________</p>
 <h4>Goal: <%= link_to "#{goal.title}", goal_url(goal) %></h4>
@@ -8,3 +9,4 @@
 <%= button_to "Remove Goal", goal_url(goal), method: :delete %>
 <p>_____________________________________</p>
 </div>
+<% end %>

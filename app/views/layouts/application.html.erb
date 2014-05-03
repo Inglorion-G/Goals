@@ -15,6 +15,7 @@
 <div align="left">
 <% if logged_in? %>
 	<p><%= current_user.username %> is signed in.</p>
+	<%= link_to "Back to Home", user_url(current_user) %>
 	<%= button_to "Log Out", session_url, method: :delete %>
 <% else %>
 	<%= link_to "Sign In", new_session_url %>
