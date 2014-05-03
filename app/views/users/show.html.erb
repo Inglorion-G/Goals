@@ -1,4 +1,4 @@
-<h1><%= @user.username %> Home</h1>
+<h1 align="center"><%= @user.username.capitalize %> Home</h1>
 <%= render @user.goals %>
 <%= link_to "Create New Goal", new_user_goal_url(@user) %><br>
 <%= link_to "Goal Feed", feed_url %>

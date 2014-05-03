@@ -37,9 +37,14 @@ class GoalsController < ApplicationController
   end
 
   def index
+    @goals = current_user.goals
+    render :index
   end
 
   def destroy
+    @goal = Goal.find(params[:id])
+    @goal.destroy
+    redirect_to user_url(@goal.user)
   end
 
   private

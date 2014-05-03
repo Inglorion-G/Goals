@@ -52,7 +52,6 @@ feature "Goal" do
   context "updating a goal" do
 
     before(:each) do
-      click_link "Create New Goal"
       create_test_goal
       click_link "Edit Goal"
     end
@@ -86,7 +85,6 @@ feature "Goal" do
   context "showing a goal" do
 
     before(:each) do
-      click_link "Create New Goal"
       create_test_goal
     end
 
@@ -113,10 +111,8 @@ feature "Goal" do
 
     scenario "user can see all owned goals" do
       click_link "Back to Home"
-      click_link "Create New Goal"
       create_private_goal
       click_link "Back to Home"
-      save_and_open_page
       expect(page).to have_content "Win at AA Assessments"
       expect(page).to have_content "Keep it secret"
     end
@@ -125,30 +121,18 @@ feature "Goal" do
 
   context "goals feed" do
 
-    buck = FactoryGirl.create(:buck)
-    completed_goal = FactoryGirl.create :completed_goal, user_id: buck.id
-    private_goal = FactoryGirl.create :private_goal, user_id: buck.id
-    buck_goal = FactoryGirl.create :buck_goal, user_id: buck.id
-
     before :each do
-
-      # click_link "Create New Goal"
-#       create_test_goal
-#       click_link "Back to Home"
-#       click_link "Create New Goal"
-#       create_private_goal
-#       logout
-#       signup_as_buck
-#       click_link "Create New Goal"
-#       create_buck_goal
-
-       click_link "Goal Feed"
+      buck = FactoryGirl.create(:buck)
+      completed_goal = FactoryGirl.create :completed_goal, user_id: buck.id
+      private_goal = FactoryGirl.create :private_goal, user_id: buck.id
+      buck_goal = FactoryGirl.create :buck_goal, user_id: buck.id
+      click_link "Goal Feed"
     end
 
     scenario "user can see all public goals" do
       save_and_open_page
       expect(page).to have_content "I kick ass"
-      expect(page).to have_content "Banana SMOOTOOOOTHIE"
+      expect(page).to have_content "Banana"
     end
 
     scenario "user cannot see private goals of other users" do
@@ -156,10 +140,24 @@ feature "Goal" do
     end
 
   end
-# destroying a goal
-  # on user show page
-  # should have button to remove goal
-  # when clicked, should navigate to user show page
-  # should have not content title of goal
+
+  context "deleting a goal" do
+
+    before :each do
+      create_test_goal
+      click_link "Back to Home"
+    end
+
+    scenario "user show page should have button to delete goals" do
+      expect(page).to have_button "Remove Goal"
+    end
+
+    scenario "deleting goal removes the goal and redirects to user show" do
+      save_and_open_page
+      click_button "Remove Goal"
+      expect(page).to_not have_content "Win at App Academy"
+    end
+
+  end
 
 end

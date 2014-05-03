@@ -1,7 +1,10 @@
-<h1><%= goal.title %></h1>
-<br>
-<p><%= goal.description %></p>
-<br>
+<div align="left" hspace=20>
+<p>_____________________________________</p>
+<h4>Goal: <%= link_to "#{goal.title}", goal_url(goal) %></h4>
+<p>Description: <%= goal.description %></p>
 <% if goal.completed %>
-  <h4>Completed</h4>
+  <h4>Completed!</h4>
 <% end %>
+<%= button_to "Remove Goal", goal_url(goal), method: :delete %>
+<p>_____________________________________</p>
+</div>

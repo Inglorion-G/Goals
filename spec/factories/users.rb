@@ -8,8 +8,9 @@ FactoryGirl.define do
     end
 
     factory :buck do
-      username "Buck"
+      sequence(:username) { |n| "Buck#{n}" }
       password "australia"
     end
   end
+
 end
